@@ -16,8 +16,9 @@ public class WeightedNode implements INode{
     public int weighted=DEF_WEIGHT;
     private INode iNode;
 
-    public static final double RANDOM_LEVEL=0.2;
+    public static final int RANDOM_LEVEL=200;
 
+    private int ram=DEF_WEIGHT;
 
     public WeightedNode(int weighted, INode node) {
         this.weighted = weighted;
@@ -29,9 +30,12 @@ public class WeightedNode implements INode{
         this.iNode = node;
     }
 
-    public int random(int sum){
-        Random random=new Random();
-        return random.nextInt((int) (sum*RANDOM_LEVEL+weighted));
+    public void initRandom(){
+        ram=new Random().nextInt(RANDOM_LEVEL*weighted);
+    }
+
+    public int getRam(){
+        return ram;
     }
 
     @Override

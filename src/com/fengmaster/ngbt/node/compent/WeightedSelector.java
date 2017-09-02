@@ -23,8 +23,6 @@ public class WeightedSelector implements INode {
 
     private WeightedNode execNode;
 
-    private int sw=0;
-
     @Override
     public void execute(Context context) {
         if (execNode==null){
@@ -58,7 +56,7 @@ public class WeightedSelector implements INode {
         }else {
             weightedNode=new WeightedNode(node);
         }
-        sw+=weightedNode.weighted;
+
         weightedNodeCompents.add(weightedNode);
 
     }
@@ -69,8 +67,8 @@ public class WeightedSelector implements INode {
     }
 
     private void randomList(List<WeightedNode> list){
-
-        list.sort(Comparator.comparingInt(o -> o.random(sw)));
+        list.forEach(weightedNode -> weightedNode.initRandom());
+        list.sort(Comparator.comparingInt(o -> o.getRam()));
 
     }
 

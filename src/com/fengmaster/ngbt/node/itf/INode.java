@@ -1,5 +1,7 @@
 package com.fengmaster.ngbt.node.itf;
 
+import org.json.JSONObject;
+
 import java.util.Collection;
 
 /**
@@ -8,9 +10,22 @@ import java.util.Collection;
  */
 public interface INode extends ICondition, IExecute {
 
+    /**
+     * 初始化
+     * @param conf 配置
+     */
+    void init(JSONObject conf);
 
+    /**
+     * 增加子节点
+     * @param node 节点
+     */
     void addNode(INode node);
 
+    /**
+     * 增加多个子节点
+     * @param nodes 节点
+     */
     void addNodes(Collection<INode> nodes);
 
 

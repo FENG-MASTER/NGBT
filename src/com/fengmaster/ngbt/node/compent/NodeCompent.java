@@ -18,7 +18,7 @@ public abstract class NodeCompent implements INode {
     public void init(JSONObject conf) throws JSONException {
         JSONArray leafs = conf.getJSONArray("leafs");
         for (int i=0;i<leafs.length();i++){
-            INode node = NodeLoader.createNodeByConf(leafs.getJSONObject(i));
+            INode node = NodeLoader.getInstance().createNodeByConf(leafs.getJSONObject(i));
             addNode(node);
         }
 

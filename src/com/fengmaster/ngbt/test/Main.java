@@ -12,6 +12,7 @@ public class Main {
 
 
     public static void main(String args[]) throws IOException, JSONException {
-        NodeLoader.getInstance().init("12");
+        NodeLoader.getInstance().addPackageName("com.fengmaster.ngbt.test");
+        NodeLoader.getInstance().init();
     }
 }

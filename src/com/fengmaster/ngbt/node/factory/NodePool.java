@@ -26,6 +26,11 @@ public class NodePool {
 
     }
 
+    /**
+     * 添加节点到节点池
+     * @param nodeName 节点名称
+     * @param iNode 节点
+     */
     public void addNode(String nodeName,INode iNode){
         iNodeMap.put(nodeName,iNode);
     }

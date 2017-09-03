@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.FileFilter;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -16,6 +17,8 @@ import java.util.List;
  * Created by qianzise on 2017/9/1.
  */
 public class NodeLoader {
+
+    private List<String> packageNames=new ArrayList<>();
 
     /**
      * 默认配置目录
@@ -27,6 +30,10 @@ public class NodeLoader {
 
     }
 
+    /**
+     * 单例
+     * @return 实例
+     */
     public static NodeLoader getInstance() {
         if (instance == null) {
             instance = new NodeLoader();
@@ -40,12 +47,12 @@ public class NodeLoader {
      * @param jsonObject 配置json
      * @return 创建的新节点
      */
-    public static INode createNodeByConf(JSONObject jsonObject) throws JSONException {
+    public INode createNodeByConf(JSONObject jsonObject) throws JSONException {
         String className = jsonObject.getString("class");//获得节点类名
         INode node = null;
         try {
             node = createNodeByClassName(className);
-        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException e) {
+        } catch (IllegalAccessException | InstantiationException e) {
             System.out.printf("找不到" + className);
             e.printStackTrace();
         }
@@ -53,11 +60,19 @@ public class NodeLoader {
         return node;
     }
 
-    private static INode createNodeByClassName(String name) throws ClassNotFoundException, IllegalAccessException, InstantiationException {
+    private INode createNodeByClassName(String name) throws IllegalAccessException, InstantiationException {
 
-        @SuppressWarnings("unchecked")
-        Class<? extends INode> clazz = (Class<? extends INode>) Class.forName(name);
-        return clazz.newInstance();
+        for (String packageName : packageNames) {
+            Class<? extends INode> clazz=null;
+            try {
+                clazz= (Class<? extends INode>) Class.forName(packageName+"."+name);//必须完整类名,包括包名
+            } catch (ClassNotFoundException e) {
+                continue;
+            }
+            return clazz.newInstance();
+        }
+
+        return null;
     }
 
     /**
@@ -69,7 +84,17 @@ public class NodeLoader {
         init(PATH_DEF);
     }
 
+    /**
+     * 初始化自定义配置文件路径
+     * @param path 配置文件路径
+     * @throws IOException io
+     * @throws JSONException json
+     */
     public void init(String path) throws IOException, JSONException {
+
+        //添加默认实现容器类包名
+        packageNames.add("com.fengmaster.ngbt.node.compent");
+        packageNames.add("");
 
         File file = new File(path);
 
@@ -82,7 +107,7 @@ public class NodeLoader {
         }
 
         //过滤掉非.conf文件
-        List<File> files = Arrays.asList(file.listFiles(pathname -> pathname.getName().substring(pathname.getName().lastIndexOf(".")).equals("conf")));
+        List<File> files = Arrays.asList(file.listFiles(pathname -> pathname.getName().substring(pathname.getName().lastIndexOf(".")+1).equals("conf")));
 
         for (File tf : files) {
             String nodeName = tf.getName().substring(0, tf.getName().lastIndexOf("."));//取出文件名
@@ -94,6 +119,14 @@ public class NodeLoader {
         }
 
 
+    }
+
+    /**
+     * 添加配置文件中使用的类的包名,或者你可以配置中直接使用完整类名
+     * @param pack 完整包名
+     */
+    public void addPackageName(String pack){
+        packageNames.add(pack);
     }
 
 }

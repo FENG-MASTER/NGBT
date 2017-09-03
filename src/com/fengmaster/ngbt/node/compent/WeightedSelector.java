@@ -17,7 +17,7 @@ import java.util.function.Consumer;
  * 或者测试完所有的节点。
  *
  */
-public class WeightedSelector implements INode {
+public class WeightedSelector extends NodeCompent {
 
     private List<WeightedNode> weightedNodeCompents=new ArrayList<>();
 

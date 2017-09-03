@@ -1,5 +1,6 @@
 package com.fengmaster.ngbt.node.itf;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Collection;
@@ -14,7 +15,7 @@ public interface INode extends ICondition, IExecute {
      * 初始化
      * @param conf 配置
      */
-    void init(JSONObject conf);
+    void init(JSONObject conf) throws JSONException;
 
     /**
      * 增加子节点

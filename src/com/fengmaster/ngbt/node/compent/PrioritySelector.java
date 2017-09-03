@@ -15,7 +15,7 @@ import java.util.concurrent.LinkedBlockingQueue;
  *
  * 当发现找到一个可执行的子节点后就停止搜索后续子节点
  */
-public class PrioritySelector implements INode {
+public class PrioritySelector extends NodeCompent {
 
     private Queue<INode> queue=new LinkedBlockingQueue<>();
 

@@ -2,6 +2,8 @@ package com.fengmaster.ngbt.node.compent;
 
 import com.fengmaster.ngbt.context.Context;
 import com.fengmaster.ngbt.node.itf.INode;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.Collection;
 import java.util.Random;
@@ -46,6 +48,11 @@ public class WeightedNode implements INode{
     @Override
     public boolean condition(Context context) {
         return iNode.condition(context);
+    }
+
+    @Override
+    public void init(JSONObject conf) throws JSONException {
+        //应该不能初始化才对
     }
 
     @Override

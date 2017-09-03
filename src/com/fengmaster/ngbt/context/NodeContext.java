@@ -7,7 +7,7 @@ import java.util.Map;
  * Created by Feng-master on 2017/8/31.
  * 行为树作用域
  */
-class NodeContext {
+public class NodeContext {
 
     private Map<Object,Object> map=new HashMap<>();
 

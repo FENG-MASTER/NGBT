@@ -1,7 +1,11 @@
 package com.fengmaster.ngbt.node.compent;
 
 import com.fengmaster.ngbt.context.Context;
+import com.fengmaster.ngbt.node.factory.NodeLoader;
 import com.fengmaster.ngbt.node.itf.INode;
+import com.fengmaster.ngbt.node.itf.IState;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.*;
 import java.util.function.Consumer;
@@ -69,9 +73,19 @@ public class WeightedSelector extends NodeCompent {
     private void randomList(List<WeightedNode> list){
         list.forEach(weightedNode -> weightedNode.initRandom());
         list.sort(Comparator.comparingInt(o -> o.getRam()));
-
+        Collections.reverse(list);
     }
 
 
+    @Override
+    public State getState(Context context) {
+        return execNode==null?State.STOP:execNode.getState(context);
+    }
 
+    @Override
+    public void initLeaf(JSONObject jsonObject) throws JSONException {
+        INode node = NodeLoader.getInstance().createNodeByConf(jsonObject);
+        int weight = jsonObject.optInt("weight",1);//获取权重
+        addNode(new WeightedNode(weight,node));
+    }
 }

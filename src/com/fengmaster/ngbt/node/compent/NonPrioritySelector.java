@@ -7,6 +7,7 @@ import org.json.JSONObject;
 
 import java.util.Collection;
 import java.util.Queue;
+import java.util.Stack;
 import java.util.concurrent.LinkedBlockingQueue;
 
 /**
@@ -42,32 +43,23 @@ public class NonPrioritySelector extends NodeCompent {
     @Override
     public boolean condition(Context context) {
 
-        Queue<INode> tq = new LinkedBlockingQueue<>();
+        int len= queue.size();
 
-        boolean flag = false;
+        for (int i=0;i<len;i++){
 
-        while (!queue.isEmpty()) {
-            INode node = queue.poll();
-            if (flag) {
-                tq.add(node);
-                continue;
+            INode node= queue.poll();
+
+            if (node.condition(context)){
+                lastExecNode=node;
+                queue.offer(node);
+                return true;
             }
 
-            if (node.condition(context)) {
-                //满足条件
-                lastExecNode = node;
-                flag = true;
-            }
-            tq.add(node);
         }
-        if (!flag) {
-            lastExecNode = null;
-        }
-
-        queue = tq;
 
         return false;
     }
+
 
 
     @Override
@@ -78,5 +70,10 @@ public class NonPrioritySelector extends NodeCompent {
     @Override
     public void addNodes(Collection<INode> nodes) {
         queue.addAll(nodes);
+    }
+
+    @Override
+    public State getState(Context context) {
+        return lastExecNode==null?State.STOP:lastExecNode.getState(context);
     }
 }

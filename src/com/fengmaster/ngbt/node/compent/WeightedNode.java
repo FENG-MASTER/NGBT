@@ -2,8 +2,10 @@ package com.fengmaster.ngbt.node.compent;
 
 import com.fengmaster.ngbt.context.Context;
 import com.fengmaster.ngbt.node.itf.INode;
+import com.fengmaster.ngbt.node.itf.IState;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.omg.CORBA.NO_IMPLEMENT;
 
 import java.util.Collection;
 import java.util.Random;
@@ -63,5 +65,10 @@ public class WeightedNode implements INode{
     @Override
     public void addNodes(Collection<INode> nodes) {
         iNode.addNodes(nodes);
+    }
+
+    @Override
+    public State getState(Context context) {
+        return iNode.getState(context);
     }
 }

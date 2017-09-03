@@ -7,7 +7,7 @@ import java.util.Map;
  * Created by Feng-master on 2017/8/31.
  * 全局作用域
  */
-class GlobalContext {
+public class GlobalContext {
 
     private static GlobalContext instance;
 

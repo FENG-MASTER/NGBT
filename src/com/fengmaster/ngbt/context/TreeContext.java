@@ -7,7 +7,7 @@ import java.util.Map;
  * Created by Feng-master on 2017/8/31.
  *  指定节点作用域
  */
-class TreeContext {
+public class TreeContext {
 
     private Map<Object,Map<Object,Object>> map=new HashMap<>();
 

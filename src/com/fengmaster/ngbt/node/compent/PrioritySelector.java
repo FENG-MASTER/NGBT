@@ -2,6 +2,7 @@ package com.fengmaster.ngbt.node.compent;
 
 import com.fengmaster.ngbt.context.Context;
 import com.fengmaster.ngbt.node.itf.INode;
+import com.fengmaster.ngbt.node.itf.IState;
 
 import java.util.Collection;
 import java.util.Queue;
@@ -53,5 +54,10 @@ public class PrioritySelector extends NodeCompent {
     @Override
     public void addNodes(Collection<INode> nodes) {
         queue.addAll(nodes);
+    }
+
+    @Override
+    public State getState(Context context) {
+        return execNode==null?State.STOP:execNode.getState(context);
     }
 }

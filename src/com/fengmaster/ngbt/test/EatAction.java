@@ -2,20 +2,17 @@ package com.fengmaster.ngbt.test;
 
 import com.fengmaster.ngbt.context.Context;
 import com.fengmaster.ngbt.node.itf.AbsActionNode;
-import com.fengmaster.ngbt.node.itf.INode;
 import com.fengmaster.ngbt.node.itf.IState;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.Collection;
-
 /**
  * Created by qianzise on 2017/9/3.
  */
-public class TestActionNode extends AbsActionNode {
+public class EatAction extends AbsActionNode {
     @Override
     public void execute(Context context) {
-        System.out.println("yes!");
+        System.out.print("1");
     }
 
     @Override
@@ -24,13 +21,12 @@ public class TestActionNode extends AbsActionNode {
     }
 
     @Override
-    public void init(JSONObject conf) throws JSONException {
-
-    }
-
-
-    @Override
     public State getState(Context context) {
         return State.STOP;
+    }
+
+    @Override
+    public void init(JSONObject conf) throws JSONException {
+
     }
 }

@@ -17,7 +17,11 @@ import java.util.concurrent.LinkedBlockingQueue;
  * <p>
  * 从上一个执行过的子节点开始选择，如果前提满足，则继续执行此节点，
  * 如果条件不满足，则从此节点开始，依次判断每一个子节点的前提，当找到一个满足条件的子节点后，则执行该节点
+ *
+ * FIXME:这里有问题,持续性无法实现,因为本设计中,AI节点只有一个,同一个AI名字的节点是同一个实例,
+ *      如果在实例中保存了上次执行的节点,那么另一个对象执行这个AI的时候,也公用了
  */
+@Deprecated
 public class NonPrioritySelector extends NodeCompent {
 
     /**

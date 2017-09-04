@@ -7,7 +7,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
- * Created by qianzise on 2017/9/5.
+ * Created by Feng-master on 2017/9/5.
+ * 宠物 无视 动作
  */
 public class IgnoreAction extends AbsActionNode{
     @Override

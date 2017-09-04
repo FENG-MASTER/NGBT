@@ -10,7 +10,7 @@ import org.json.JSONObject;
 import java.util.Collection;
 
 /**
- * Created by qianzise on 2017/9/3.
+ * Created by Feng-master on 2017/9/3.
  * 容器节点基类
  */
 public abstract class NodeCompent implements INode {

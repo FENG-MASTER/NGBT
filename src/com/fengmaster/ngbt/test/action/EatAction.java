@@ -7,7 +7,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
- * Created by qianzise on 2017/9/3.
+ * Created by Feng-master on 2017/9/3.
+ * 宠物 吃 动作
  */
 public class EatAction extends AbsActionNode {
     @Override

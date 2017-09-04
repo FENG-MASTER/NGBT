@@ -6,7 +6,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
- * Created by qianzise on 2017/9/3.
+ * Created by Feng-master on 2017/9/3.
  */
 public class ActionCD extends AbsActionNode{
     private int cd=0;

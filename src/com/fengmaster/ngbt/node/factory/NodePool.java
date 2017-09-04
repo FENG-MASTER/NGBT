@@ -7,7 +7,7 @@ import java.util.Map;
 
 /**
  * Created by qianzise on 2017/9/1.
- * 节点池
+ * 节点池,负责保存来自配置目录中的所有配置行为树
  */
 public class NodePool {
 

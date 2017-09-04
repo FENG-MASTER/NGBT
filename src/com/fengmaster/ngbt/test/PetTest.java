@@ -8,29 +8,29 @@ import com.fengmaster.ngbt.node.itf.IState;
 import org.json.JSONException;
 
 import java.io.IOException;
+import java.util.Scanner;
 
 /**
  * Created by qianzise on 2017/9/3.
+ * 例子1:宠物喂食
  */
-public class Main {
+public class PetTest {
 
 
     public static void main(String args[]) throws IOException, JSONException {
-        NodeLoader.getInstance().addPackageName("com.fengmaster.ngbt.test");
+        NodeLoader.getInstance().addPackageName("com.fengmaster.ngbt.test.action");
         NodeLoader.getInstance().init();
 
+        Scanner scanner=new Scanner(System.in);
 
         while (true){
+            INode attackMonster = NodePool.getInstance().getNode("Pet");
 
-
-            INode attackMonster = NodePool.getInstance().getNode("AttackMonster");
-            INode attackMonster2 = (INode) NodePool.getInstance().getNode("AttackMonster").copy();
             Context context=new Context();
-            context.getNodeContext().put("ActionCD","key1","123");
-            context.getGlobalContext().put("TIME",System.currentTimeMillis());
+            context.getTreeContext().put("meat",scanner.next());
 
-            if (attackMonster2.getState(context)!= IState.State.RUNNING&&attackMonster2.condition(context)){
-                attackMonster2.execute(context);
+            if (attackMonster.getState(context)!= IState.State.RUNNING&&attackMonster.condition(context)){
+                attackMonster.execute(context);
             }
 
 

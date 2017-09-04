@@ -123,6 +123,7 @@ public class NodeLoader {
 
     /**
      * 添加配置文件中使用的类的包名,或者你可以配置中直接使用完整类名
+     * PS:当出现多个包里相同类名,会先检查先添加的包名
      * @param pack 完整包名
      */
     public void addPackageName(String pack){

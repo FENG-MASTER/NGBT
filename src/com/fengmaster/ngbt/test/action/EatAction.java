@@ -1,4 +1,4 @@
-package com.fengmaster.ngbt.test;
+package com.fengmaster.ngbt.test.action;
 
 import com.fengmaster.ngbt.context.Context;
 import com.fengmaster.ngbt.node.itf.AbsActionNode;
@@ -12,11 +12,19 @@ import org.json.JSONObject;
 public class EatAction extends AbsActionNode {
     @Override
     public void execute(Context context) {
-        System.out.print("1");
+        String meat = (String) context.getTreeContext().get("meat");
+        if (meat==null){
+            return;
+        }
+        System.out.println("宠物吃掉了"+meat);
     }
 
     @Override
     public boolean condition(Context context) {
+        String meat = (String) context.getTreeContext().get("meat");
+        if (meat==null){
+            return false;
+        }
         return true;
     }
 

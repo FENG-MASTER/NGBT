@@ -1,4 +1,4 @@
-package com.fengmaster.ngbt.test;
+package com.fengmaster.ngbt.test.action;
 
 import com.fengmaster.ngbt.context.Context;
 import com.fengmaster.ngbt.node.itf.AbsActionNode;

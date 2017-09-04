@@ -1,9 +1,17 @@
-#Next-Gen-Behavior-Tree
+# Next-Gen-Behavior-Tree #
 
-##introduction
+## 介绍 ##
+
+一个基于java的行为树库
+
+## 进度 ##
+
+目前还在开发中
+
+## introduction ##
 
 a BehaviorTree lib base on Java.
 
-##progress
+## progress ##
 
 still coding.

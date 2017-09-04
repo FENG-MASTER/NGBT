@@ -9,7 +9,7 @@ import java.util.Collection;
  * Created by Feng-master on 2017/8/22.
  * 节点接口
  */
-public interface INode extends ICondition, IExecute,IState {
+public interface INode extends ICondition, IExecute,IState,ICopyable {
 
     /**
      * 初始化

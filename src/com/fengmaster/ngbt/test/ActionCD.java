@@ -2,7 +2,6 @@ package com.fengmaster.ngbt.test;
 
 import com.fengmaster.ngbt.context.Context;
 import com.fengmaster.ngbt.node.itf.AbsActionNode;
-import com.fengmaster.ngbt.node.itf.IState;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -19,6 +18,7 @@ public class ActionCD extends AbsActionNode{
     public void execute(Context context) {
         long time= (long) context.getGlobalContext().get("TIME");
         startTime=time;
+        context.getTreeContext();
     }
 
     @Override
@@ -39,5 +39,13 @@ public class ActionCD extends AbsActionNode{
         }
         long time= (long) context.getGlobalContext().get("TIME");
         return startTime+cd>= time?State.RUNNING:State.STOP;
+    }
+
+    @Override
+    public Object copy() {
+        ActionCD actionCD = new ActionCD();
+        actionCD.cd=cd;
+        actionCD.startTime=startTime;
+        return actionCD;
     }
 }

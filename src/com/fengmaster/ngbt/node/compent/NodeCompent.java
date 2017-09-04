@@ -1,5 +1,6 @@
 package com.fengmaster.ngbt.node.compent;
 
+import com.fengmaster.ngbt.context.Context;
 import com.fengmaster.ngbt.node.factory.NodeLoader;
 import com.fengmaster.ngbt.node.itf.INode;
 import org.json.JSONArray;
@@ -28,4 +29,11 @@ public abstract class NodeCompent implements INode {
         addNode(node);
     }
 
+
+
+    @Override
+    public void execute(Context context) {
+
+
+    }
 }

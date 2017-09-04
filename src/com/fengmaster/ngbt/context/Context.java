@@ -1,32 +1,39 @@
 package com.fengmaster.ngbt.context;
 
-import java.util.Map;
-
 /**
  * Created by Feng-master on 2017/8/31.
  * 行为树上下文对象
  */
 public class Context {
 
+    /**
+     * 全局上下文
+     */
     private GlobalContext globalContext;
-    private NodeContext nodeContext;
+    /**
+     * 行为树上下文
+     */
     private TreeContext treeContext;
+    /**
+     * 指定节点上下文
+     */
+    private NodeContext nodeContext;
 
     public Context(){
         globalContext=GlobalContext.getInstance();
-        treeContext=TreeContext.newInstance();
-        nodeContext=NodeContext.newInstance();
+        nodeContext = NodeContext.newInstance();
+        treeContext = TreeContext.newInstance();
     }
 
     public GlobalContext getGlobalContext() {
         return globalContext;
     }
 
-    public NodeContext getNodeContext() {
-        return nodeContext;
-    }
-
     public TreeContext getTreeContext() {
         return treeContext;
+    }
+
+    public NodeContext getNodeContext() {
+        return nodeContext;
     }
 }

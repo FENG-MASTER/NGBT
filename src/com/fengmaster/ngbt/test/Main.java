@@ -24,11 +24,13 @@ public class Main {
 
 
             INode attackMonster = NodePool.getInstance().getNode("AttackMonster");
+            INode attackMonster2 = (INode) NodePool.getInstance().getNode("AttackMonster").copy();
             Context context=new Context();
+            context.getNodeContext().put("ActionCD","key1","123");
             context.getGlobalContext().put("TIME",System.currentTimeMillis());
 
-            if (attackMonster.getState(context)!= IState.State.RUNNING&&attackMonster.condition(context)){
-                attackMonster.execute(context);
+            if (attackMonster2.getState(context)!= IState.State.RUNNING&&attackMonster2.condition(context)){
+                attackMonster2.execute(context);
             }
 
 

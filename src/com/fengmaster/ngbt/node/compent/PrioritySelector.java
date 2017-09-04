@@ -46,6 +46,7 @@ public class PrioritySelector extends NodeCompent {
         return false;
     }
 
+
     @Override
     public void addNode(INode node) {
         queue.add(node);
@@ -59,5 +60,16 @@ public class PrioritySelector extends NodeCompent {
     @Override
     public State getState(Context context) {
         return execNode==null?State.STOP:execNode.getState(context);
+    }
+
+    @Override
+    public Object copy() {
+        PrioritySelector prioritySelector = new PrioritySelector();
+        prioritySelector.execNode=null;
+        prioritySelector.queue=new LinkedBlockingQueue<>();
+        for (INode node : queue) {
+            prioritySelector.queue.add((INode)node.copy());
+        }
+        return prioritySelector;
     }
 }

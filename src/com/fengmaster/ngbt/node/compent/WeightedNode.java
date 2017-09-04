@@ -71,4 +71,9 @@ public class WeightedNode implements INode{
     public State getState(Context context) {
         return iNode.getState(context);
     }
+
+    @Override
+    public Object copy() {
+        return new WeightedNode(weighted,(INode) iNode.copy());
+    }
 }

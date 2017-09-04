@@ -19,4 +19,16 @@ public abstract class AbsActionNode implements INode {
     public void addNodes(Collection<INode> nodes) {
         return;
     }
+
+    @Override
+    public Object copy() {
+        try {
+            return this.getClass().newInstance();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

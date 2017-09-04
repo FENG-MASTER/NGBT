@@ -88,4 +88,16 @@ public class WeightedSelector extends NodeCompent {
         int weight = jsonObject.optInt("weight",1);//获取权重
         addNode(new WeightedNode(weight,node));
     }
+
+    @Override
+    public Object copy() {
+        WeightedSelector clone = new WeightedSelector();
+        clone.execNode=null;
+        clone.weightedNodeCompents=new LinkedList<>();
+        for (WeightedNode weightedNodeCompent : weightedNodeCompents) {
+            clone.weightedNodeCompents.add((WeightedNode)weightedNodeCompent.copy());
+
+        }
+        return clone;
+    }
 }

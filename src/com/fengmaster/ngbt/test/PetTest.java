@@ -12,9 +12,9 @@ import java.util.Scanner;
 
 /**
  * Created by Feng-master on 2017/9/3.
- * 例子1:宠物喂食
+ * 例子1:宠物喂食随机动作(pet.conf)
  *
- * 这个例子展示了怎么使用 带权值的选择节点{@link com.fengmaster.ngbt.node.compent.WeightedSelector}
+ * 例子展示了怎么使用 带权值的选择节点{@link com.fengmaster.ngbt.node.compent.WeightedSelector}
  * 配置出带有一定随机性的ai
  *
  * 本例子中,宠物ai会根据配置文件中的几率做出相应动作
@@ -22,7 +22,13 @@ import java.util.Scanner;
  *  吃掉肉(EatAction):喂肉给自己的孩子(FeedAction):无视肉(IgnoreAction)
  *       2          :            1             :       1
  *
+ * 例子2:宠物优先喂饱孩子ai(Pet2.conf)
  *
+ * 这个例子展示了怎么使用 不带优先级的选择节点{@link com.fengmaster.ngbt.node.compent.NonPrioritySelector}
+ *
+ * 这个ai的行为表现是: 优先喂饱所有的孩子,然后再自己吃或者不吃
+ *
+ * 这里涉及到了 <b>不带优先级的选择节点会先选择上一次执行的节点去检查</b>
  *
  *
  */
@@ -41,6 +47,7 @@ public class PetTest {
         while (true){
             //使用配置文件Pet.conf的ai
             INode petAi = NodePool.getInstance().getNode("Pet");
+//            INode petAi = NodePool.getInstance().getNode("Pet2");
 
             //new一个上下文对象,用于传递参数给行为树节点
             Context context=new Context();

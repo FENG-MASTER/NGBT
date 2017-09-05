@@ -49,12 +49,13 @@ public class NonPrioritySelector extends NodeCompent {
 
         for (int i=0;i<len;i++){
 
-            INode node= queue.poll();
+            INode node= queue.peek();
 
             if (node.condition(context)){
                 lastExecNode=node;
-                queue.offer(node);
                 return true;
+            }else {
+                queue.offer(queue.poll());
             }
 
         }

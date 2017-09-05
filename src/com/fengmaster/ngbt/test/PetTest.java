@@ -64,7 +64,6 @@ public class PetTest {
             Context context=new Context();
             //传入行为树上下文变量,key为meat,值为玩家输入的肉名称
             context.getTreeContext().put("meat",scanner.next());
-
             if (petAi.getState(context)!= IState.State.RUNNING&&petAi.condition(context)){
                 //执行行为树
                 petAi.execute(context);

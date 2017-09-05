@@ -121,9 +121,13 @@ NodeLoader.getInstance().init()函数中可以传入配置文件目录,否则默
 
 这样就获得了我们配置好的pet.conf对应的行为树了.
 
+	//new一个上下文对象,用于传递参数给行为树节点
+    Context context=new Context();
 	petAi.execute(context);
 
 就可以直接执行了
+
+具体怎么传递参数,后面也有说明
 
 
 
@@ -237,3 +241,81 @@ PS:所有子节点可以配置相应的权重值,这个值影响到了随机选�
 #### 节点状态 ####
 
 节点状态完全和找到的满足条件的子节点状态相同
+
+
+## 传递参数 ##
+
+大部分时候,你都会需要向行为树中的节点传递参数
+
+这里提供了三种作用域的参数传递方式
+
+首先都需要**新建一个上下文对象**:
+
+	Context context=new Context();
+
+### 全局上下文 ###
+
+全局上下文对象里的所有变量,是所有行为树共享的,即只有一个全局上下文对象
+
+**用于多个行为树之间传递变量**
+
+#### 添加变量 ####
+
+	context.getGlobalContext().put("key","val");
+
+传入一个键值对即可,key类型为Object,val类型也是Object
+
+#### 获得变量 ####
+
+     context.getGlobalContext().get("key");
+
+#### 移除变量 ####
+
+     context.getGlobalContext().remove("key");
+
+### 行为树级上下文 ###
+
+行为树级上下文对象,只能在本行为树中使用,具体的说,一个Context对象包含了一个行为树级上下文对象,使用方式上和全局上下文一样
+
+#### 添加变量 ####
+
+	context.getTreeContext().put("key","val");
+
+传入一个键值对即可,key类型为Object,val类型也是Object
+
+#### 获得变量 ####
+
+     context.getTreeContext().get("key");
+
+#### 移除变量 ####
+
+     context.getTreeContext().remove("key");
+
+### 节点级上下文 ###
+
+节点级上下文对象,只能某个指定节点才能获得相应的变量,用于指定节点直接的参数传递
+
+#### 添加变量 ####
+
+	context.getNodeContext().put("nodeName","key","val");
+
+第一个参数为指定的节点类名,key类型为Object,val类型也是Object,这样我们就传入了一个只能由特定节点获得的变量
+
+#### 获得变量 ####
+
+要获得节点级上下文的变量,必须在节点中执行
+
+    context.getNodeContext().get(this,"key");
+
+第一个参数是一个INode对象,一般传入自身,因为我们要获得是自己所能得到的变量
+
+PS:这里不是强制直接传入this,这只是一种规约
+
+#### 移除变量 ####
+
+     context.getNodeContext().remove(this,"key");
+     context.getNodeContext().remove("nodeName","key");
+
+以上两种方式都可以移除节点级上下文中的变量
+
+

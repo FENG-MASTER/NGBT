@@ -58,4 +58,18 @@ public class NodeContext {
         map.get(nodeName).put(key,val);
     }
 
+
+    public void remove(INode iNode,Object key){
+        remove(iNode.getClass().getSimpleName(),key);
+    }
+
+    public void remove(String name,Object key){
+        if (map.containsKey(name)){
+            Map<Object, Object> objectObjectMap = map.get(name);
+            if (objectObjectMap.containsKey(key)){
+                objectObjectMap.remove(key);
+            }
+        }
+    }
+
 }

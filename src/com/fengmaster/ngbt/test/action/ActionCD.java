@@ -17,6 +17,7 @@ public class ActionCD extends AbsActionNode{
     @Override
     public void execute(Context context) {
         long time= (long) context.getGlobalContext().get("TIME");
+        context.getNodeContext().remove("nodeName","key");
         startTime=time;
         context.getTreeContext();
     }

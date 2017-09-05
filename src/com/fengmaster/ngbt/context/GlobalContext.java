@@ -45,4 +45,10 @@ public class GlobalContext {
     public void put(Object key,Object val){
         map.put(key,val);
     }
+
+    public void remove(Object key){
+        if (map.containsKey(key)){
+            map.remove(key);
+        }
+    }
 }

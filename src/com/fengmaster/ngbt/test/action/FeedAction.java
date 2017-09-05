@@ -45,7 +45,7 @@ public class FeedAction extends AbsActionNode{
 
     @Override
     public State getState(Context context) {
-        return null;
+        return State.STOP;
     }
 
     @Override

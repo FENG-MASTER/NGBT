@@ -31,6 +31,15 @@ import java.util.Scanner;
  * 这里涉及到了 <b>不带优先级的选择节点会先选择上一次执行的节点去检查</b>
  *
  *
+ * 例子3:宠物只要特定的食物(Pet3.conf)
+ *
+ * 这个例子展示了怎么使用 顺序节点{@link com.fengmaster.ngbt.node.compent.Sequence} 实现节点条件且判断的效果
+ *
+ * 这个ai的行为表现是 : 如果输入的食物不是good开头的,宠物会无视
+ *
+ * 如果是good开头的,宠物会吃掉或者喂自己的孩子
+ *
+ *
  */
 public class PetTest {
 
@@ -48,6 +57,8 @@ public class PetTest {
             //使用配置文件Pet.conf的ai
             INode petAi = NodePool.getInstance().getNode("Pet");
 //            INode petAi = NodePool.getInstance().getNode("Pet2");
+//            INode petAi = NodePool.getInstance().getNode("Pet3");
+
 
             //new一个上下文对象,用于传递参数给行为树节点
             Context context=new Context();

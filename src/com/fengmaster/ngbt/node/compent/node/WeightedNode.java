@@ -1,4 +1,4 @@
-package com.fengmaster.ngbt.node.compent;
+package com.fengmaster.ngbt.node.compent.node;
 
 import com.fengmaster.ngbt.context.Context;
 import com.fengmaster.ngbt.node.itf.INode;
@@ -12,6 +12,8 @@ import java.util.Random;
 
 /**
  * Created by Feng-master on 2017/8/31.
+ *带权值的选择节点 用到的 辅助性节点容器,就是存了一个weighted而已
+ * {@link com.fengmaster.ngbt.node.compent.WeightedSelector}
  */
 public class WeightedNode implements INode{
 

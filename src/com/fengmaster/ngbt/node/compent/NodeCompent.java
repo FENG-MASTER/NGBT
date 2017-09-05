@@ -30,10 +30,4 @@ public abstract class NodeCompent implements INode {
     }
 
 
-
-    @Override
-    public void execute(Context context) {
-
-
-    }
 }

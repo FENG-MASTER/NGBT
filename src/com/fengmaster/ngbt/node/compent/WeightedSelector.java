@@ -1,6 +1,7 @@
 package com.fengmaster.ngbt.node.compent;
 
 import com.fengmaster.ngbt.context.Context;
+import com.fengmaster.ngbt.node.compent.node.WeightedNode;
 import com.fengmaster.ngbt.node.factory.NodeLoader;
 import com.fengmaster.ngbt.node.itf.INode;
 import com.fengmaster.ngbt.node.itf.IState;

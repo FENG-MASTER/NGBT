@@ -26,6 +26,11 @@ public class NodeLoader {
     public static final String PATH_DEF = new File("").getAbsolutePath()+"\\conf\\";
     private static NodeLoader instance;
 
+    /**
+     * 配置目录
+     */
+    private String path;
+
     private NodeLoader() {
 
     }
@@ -51,16 +56,25 @@ public class NodeLoader {
         String className = jsonObject.getString("class");//获得节点类名
         INode node = null;
         try {
-            node = createNodeByClassName(className);
+            node = createNodeByClassName(className,jsonObject);
         } catch (IllegalAccessException | InstantiationException e) {
             System.out.printf("找不到" + className);
             e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        node.init(jsonObject);
         return node;
     }
 
-    private INode createNodeByClassName(String name) throws IllegalAccessException, InstantiationException {
+    private INode createNodeByClassName(String name,JSONObject conf) throws IllegalAccessException, InstantiationException, IOException, JSONException {
+        if (NodePool.getInstance().getNode(name)!=null){
+            return NodePool.getInstance().getNode(name);
+        }
+
+        File file=new File(path+name+".conf");
+        if (file.exists()&&file.isFile()&&file.getName().substring(file.getName().lastIndexOf(".")+1).equals("conf")){
+           return initFile(file,name);
+        }
 
         for (String packageName : packageNames) {
             Class<? extends INode> clazz=null;
@@ -69,7 +83,9 @@ public class NodeLoader {
             } catch (ClassNotFoundException e) {
                 continue;
             }
-            return clazz.newInstance();
+            INode node = clazz.newInstance();
+            node.init(conf);
+            return node;
         }
 
         return null;
@@ -92,6 +108,8 @@ public class NodeLoader {
      */
     public void init(String path) throws IOException, JSONException {
 
+        this.path=path;
+
         //添加默认实现容器类包名
         packageNames.add("com.fengmaster.ngbt.node.compent");
         packageNames.add("");
@@ -112,9 +130,11 @@ public class NodeLoader {
         for (File tf : files) {
             String nodeName = tf.getName().substring(0, tf.getName().lastIndexOf("."));//取出文件名
 
-            JSONObject jo = Util.readFile2Json(tf);//读取配置文件
+            if(NodePool.getInstance().getNode(nodeName)!=null){
+                continue;
+            }
 
-            NodePool.getInstance().addNode(nodeName, createNodeByConf(jo));//存入节点池
+            initFile(tf,nodeName);
 
         }
 
@@ -128,6 +148,13 @@ public class NodeLoader {
      */
     public void addPackageName(String pack){
         packageNames.add(pack);
+    }
+
+    private INode initFile(File file,String nodeName) throws IOException, JSONException {
+        JSONObject jo = Util.readFile2Json(file);//读取配置文件
+        INode node = createNodeByConf(jo);
+        NodePool.getInstance().addNode(nodeName, node);//存入节点池
+        return node;
     }
 
 }

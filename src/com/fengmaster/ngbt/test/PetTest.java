@@ -55,7 +55,7 @@ public class PetTest {
 
         while (true){
             //使用配置文件Pet.conf的ai
-            INode petAi = NodePool.getInstance().getNode("Pet");
+            INode petAi = NodePool.getInstance().getNode("Pet4");
 //            INode petAi = NodePool.getInstance().getNode("Pet2");
 //            INode petAi = NodePool.getInstance().getNode("Pet3");
 
